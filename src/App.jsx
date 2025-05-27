@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Comment from './components/Comment.jsx';
 import Card from './components/Card.jsx';
+import AddComment from './components/AddComment.jsx';
 // This is a simple React component that renders "Hello World"
 
 const commentsData = [
@@ -32,26 +33,33 @@ const commentsData = [
 
 //Solution 1 : Utiliser une classe qui hérite de React.Component
 // Cette classe doit contenir une méthode render qui retourne du JSX (combien de HTML et de JavaScript)
-class App extends React.Component {
-  render() {
-    return (
-      <>
-        {
-          commentsData.map((comment, index) => (
-            <Card >
-              <Comment
-                key={index}
-                avatar={comment.avatar}
-                name={comment.name}
-                date={comment.date}
-                message={comment.message}
-              />
-            </Card>
-          ))
-        }
-      </>
-    );
+const App = () => {
+  const [comments, setComments] = useState(commentsData); //Un objet d'état est immutable
+
+  const addNewComment = (newComment) =>{
+    console.log(newComment);
+    setComments([...comments, newComment]);
   }
+
+  return (
+    <>
+      {
+        comments.map((comment, index) => (
+          <Card key={index}>
+            <Comment
+              key={index}
+              avatar={comment.avatar}
+              name={comment.name}
+              date={comment.date}
+              message={comment.message}
+              
+            />
+          </Card>
+        ))
+      }
+      <AddComment addNewCommentHandler={addNewComment} />
+    </>
+  );
 }
        
 
