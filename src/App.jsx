@@ -1,5 +1,6 @@
 import React from 'react';
 import Comment from './components/Comment.jsx';
+import Card from './components/Card.jsx';
 // This is a simple React component that renders "Hello World"
 
 const commentsData = [
@@ -37,13 +38,15 @@ class App extends React.Component {
       <>
         {
           commentsData.map((comment, index) => (
-            <Comment
-              key={index}
-              avatar={comment.avatar}
-              name={comment.name}
-              date={comment.date}
-              message={comment.message}
-            />
+            <Card >
+              <Comment
+                key={index}
+                avatar={comment.avatar}
+                name={comment.name}
+                date={comment.date}
+                message={comment.message}
+              />
+            </Card>
           ))
         }
       </>
